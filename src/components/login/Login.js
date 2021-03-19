@@ -1,42 +1,21 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom'
+import React, { useState, useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import './Login.css';
 
-async function loginUser(credentials) {
+import { Context } from '../../context/AuthContext';
 
-    console.log('credentials', credentials)
-    return fetch('http://localhost:8000/auth/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-    }).then(data => {
+export default function Login() {
 
-        console.log('datareceived', data);
-    })
-}
-
-export default function Login({ setToken }) {
-
-    console.log('setToken', setToken)
-
-    const [userName, setUserName] = useState();
+    const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const { authenticated, handleLogin } = useContext(Context);
 
     const handleSubmit = async e => {
 
         e.preventDefault();
 
-        const token = await loginUser({
-            user_name: userName,
-            password
-        });
-
-        setToken(token);
-    }
+        handleLogin({ email, password });
+    };
 
     return (
         <div className="login-wrapper">
@@ -44,7 +23,7 @@ export default function Login({ setToken }) {
                 <div className="row">
                     <label>
                         <p>Email</p>
-                        <input type="text" onChange={e => setUserName(e.target.value)} required />
+                        <input type="text" onChange={e => setEmail(e.target.value)} required />
                     </label>
                 </div>
                 <div className="row">
@@ -60,7 +39,3 @@ export default function Login({ setToken }) {
         </div>
     )
 }
-
-Login.propTypes = {
-    setToken: PropTypes.func.isRequired
-};
