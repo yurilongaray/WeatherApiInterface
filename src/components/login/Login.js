@@ -9,7 +9,7 @@ export default function Login() {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const { authenticated, handleLogin } = useContext(Context);
+    const { handleLogin } = useContext(Context);
 
     const handleSubmit = async e => {
 

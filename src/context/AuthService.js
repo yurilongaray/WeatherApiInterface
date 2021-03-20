@@ -33,6 +33,7 @@ export default function AuthService() {
     }
 
     function handleLogout() {
+
         setAuthenticated(false);
         localStorage.removeItem('token');
         api.defaults.headers.Authorization = undefined;
