@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Button } from 'react-bootstrap';
+import { Link, Redirect } from 'react-router-dom'
 
 import './Login.css';
 
@@ -9,7 +10,12 @@ export default function Login() {
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const { handleLogin } = useContext(Context);
+    const { authenticated, handleLogin } = useContext(Context);
+
+    if (authenticated) {
+
+        return <Redirect to="/weather" />;
+    }
 
     const handleSubmit = async e => {
 
@@ -27,15 +33,20 @@ export default function Login() {
                         <input type="text" placeholder="your.email@domain.com" onChange={e => setEmail(e.target.value)} required />
                     </label>
                 </div>
-                <br/>
+                <br />
                 <div className="row">
                     <label>
                         <p>Password:</p>
                         <input type="password" placeholder="*******" onChange={e => setPassword(e.target.value)} />
                     </label>
                 </div>
-                <div>
-                    <Button type="submit">Login</Button>
+                <div className="row">
+                    <div className="col-md-6">
+                        <Button type="submit">Login</Button>
+                    </div>
+                    <div className="col-md-6">
+                        <Link to="/"><Button variant="secondary">Back to Home</Button></Link>
+                    </div>
                 </div>
             </form>
         </div>

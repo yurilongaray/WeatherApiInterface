@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Button } from 'react-bootstrap';
+import { Link, Redirect } from 'react-router-dom'
 import api from '../../Api';
 
 import './Register.css';
@@ -12,6 +13,11 @@ export default function Register() {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const { authenticated, handleLogin } = useContext(Context);
+
+    if (authenticated) {
+
+        return <Redirect to="/weather" />;
+    }
 
     const handleSubmit = async e => {
 
@@ -53,8 +59,13 @@ export default function Register() {
                         <input type="password" placeholder="*******" onChange={e => setPassword(e.target.value)} />
                     </label>
                 </div>
-                <div>
-                    <Button type="submit">Submit</Button>
+                <div className="row">
+                    <div className="col-md-6">
+                        <Button type="submit">Submit</Button>
+                    </div>
+                    <div className="col-md-6">
+                        <Link to="/"><Button variant="secondary">Back to Home</Button></Link>
+                    </div>
                 </div>
             </form>
         </div>

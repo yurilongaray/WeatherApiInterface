@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
+import ReactLoading from "react-loading";
 import api from '../../Api';
 
 import './Weather.css';
@@ -9,35 +10,80 @@ import { Context } from '../../context/AuthContext';
 export default function Weather() {
 
     const [city, setCity] = useState();
-    const [x, setX] = useState();
+    const [result, setResult] = useState();
+    const [loading, setLoading] = useState(false);
     const { handleLogout } = useContext(Context);
+    const cityToConsider = city || 'Vancouver';
 
     const getCityInformations = async () => {
 
-        const cityToConsider = city || 'Vancouver';
+        setLoading(true);
 
-        const result = await api.get(`/weather?city=${cityToConsider}`);
+        api.get(`/weather?city=${cityToConsider}`).then(result => {
 
-        setX(cityToConsider)
+            setLoading(false);
+
+            setResult(result.data);
+        }).catch(error => {
+
+            console.error(error);
+
+            alert('City not found!');
+
+            setLoading(false);
+        });
     }
 
     return (
         <div className="weather-wrapper">
-            <label>See your city's weather</label>
-            <div className="row">
-                <label>
-                    <input type="text" defaultValue="Vancouver" onChange={e => setCity(e.target.value)} required />
-                </label>
-            </div>
-            <div className="row">
-                <div className="col-md-6">
-                    <Button type="submit" onClick={e => getCityInformations()}>Show me!</Button>
+            {loading ? (
+                <div className="col-md-6 offset-md-3">
+                    <ReactLoading type="spokes" color="#fff" />
                 </div>
-                <div className="col-md-6">
-                    <Button type="button" variant="danger" onClick={e => handleLogout()}>Logout</Button>
+            ) : (
+                <div>
+                    <label>City</label>
+                    <div className="row">
+                        <div className="col-md-12">
+                            <label>
+                                <input type="text" defaultValue="Vancouver" onChange={e => setCity(e.target.value)} required />
+                            </label>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <Button type="submit" onClick={e => getCityInformations()}>Show me!</Button>
+                        </div>
+                        <div className="col-md-6">
+                            <Button type="button" variant="danger" onClick={e => handleLogout()}>Logout</Button>
+                        </div>
+                    </div>
+                    <br />
+                    <h1>{result ? `${result.cityName} (${result.country})` : ''}</h1>
+                    <Table className="Table" striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Temperature (Fahrenheit)</th>
+                                <th>Temperature (Celsius)</th>
+                                <th>Wind Speed (kph)</th>
+                                <th>Weather Conditions</th>
+                            </tr>
+                        </thead>
+                        {Boolean(result) ? (
+                            <tbody>
+                                <tr>
+                                    <td>{result ? result.tempFahrenheit : ''}</td>
+                                    <td>{result ? result.tempCelsius : ''}</td>
+                                    <td>{result ? result.windSpeedKph : ''}</td>
+                                    <td>{result ? result.weatherDescription : ''}</td>
+                                </tr>
+                            </tbody>
+                        ) : (
+                            <tbody></tbody>
+                        )}
+                    </Table>
                 </div>
-            </div>
-            <h1>{x}</h1>
+            )}
         </div>
     );
 }
