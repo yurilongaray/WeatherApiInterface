@@ -23,17 +23,20 @@ export default function Register() {
 
         e.preventDefault();
 
-        try {
+        const payloadToSend = { name, email, password };
 
-            const payloadToSend = { name, email, password };
-
-            await api.post('/user/register', payloadToSend);
+        return api.post('/user/register', payloadToSend).then(async () => {
 
             await handleLogin({ name, email, password });
-        } catch (error) {
+        }).catch(({ response }) => {
 
-            console.error(error);
-        }
+            if (response.data && response.data.message) {
+
+                alert(response.data.message);
+            }
+
+            console.log(response.data);
+        });
     };
 
     return (
@@ -56,7 +59,7 @@ export default function Register() {
                 <div className="row">
                     <label>
                         <p>Password</p>
-                        <input type="password" placeholder="*******" onChange={e => setPassword(e.target.value)} />
+                        <input type="password" placeholder="*******" onChange={e => setPassword(e.target.value)} required />
                     </label>
                 </div>
                 <div className="row">

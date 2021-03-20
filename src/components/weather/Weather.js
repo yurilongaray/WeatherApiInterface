@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import ReactLoading from "react-loading";
 import api from '../../Api';
@@ -42,11 +42,11 @@ export default function Weather() {
                 </div>
             ) : (
                 <div>
-                    <label>City</label>
+                    <label>City:</label>
                     <div className="row">
                         <div className="col-md-12">
                             <label>
-                                <input type="text" defaultValue="Vancouver" onChange={e => setCity(e.target.value)} required />
+                                <input type="text" placeholder="Ex.: Vancouver" onChange={e => setCity(e.target.value)} required />
                             </label>
                         </div>
                     </div>

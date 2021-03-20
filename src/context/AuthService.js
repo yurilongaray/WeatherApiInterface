@@ -23,13 +23,19 @@ export default function AuthService() {
 
     async function handleLogin({ email, password }) {
 
-        const { data: { token } } = await api.post('/auth/login', { email, password });
+        return api.post('/auth/login', { email, password }).then(result => {
 
-        localStorage.setItem('token', JSON.stringify(token));
-        api.defaults.headers.Authorization = `Bearer ${token}`;
-        setAuthenticated(true);
+            const { data: { token } } = result;
 
-        History.push('/weather');
+            localStorage.setItem('token', JSON.stringify(token));
+            api.defaults.headers.Authorization = `Bearer ${token}`;
+            setAuthenticated(true);
+
+            History.push('/weather');
+        }).catch(error => {
+
+            alert('Incorrect email or password.')
+        });
     }
 
     function handleLogout() {
