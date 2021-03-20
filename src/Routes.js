@@ -6,13 +6,13 @@ import { Context } from './context/AuthContext';
 import Home from './components/home/Home';
 import Login from './components/login/Login';
 import Weather from './components/weather/Weather';
+import Register from './components/register/Register';
 
 
 function CustomRoute({ isPrivate, ...rest }) {
 
     const { loading, authenticated } = useContext(Context);
 
-    debugger;
     if (loading) {
 
         return <h2>Loading...</h2>;
@@ -30,7 +30,8 @@ export default function Routes() {
 
     return (
         <Switch>
-            <CustomRoute exact path="/" component={Home} />
+        <CustomRoute exact path="/" component={Home} />
+            <CustomRoute exact path="/register" component={Register} />
             <CustomRoute exact path="/login" component={Login} />
             <CustomRoute isPrivate exact path="/weather" component={Weather} />
         </Switch>

@@ -12,15 +12,13 @@ function App() {
 
     return (
         <div className="App">
-            <header className="App-header">
-                <div className="wrapper">
-                    <AuthProvider>
-                        <Router history={History}>
-                            <Routes />
-                        </Router>
-                    </AuthProvider>
-                </div>
-            </header>
+            <div className="wrapper">
+                <AuthProvider>
+                    <Router history={History}>
+                        <Routes />
+                    </Router>
+                </AuthProvider>
+            </div>
         </div>
     );
 }

@@ -9,8 +9,8 @@ export default function Home() {
     return (
         <div className="Home">
         <h1>Weather Application</h1>
-            <Link to="/" ><Button variant="success">Sign in</Button></Link>
-            <Link to="/login"><Button>Sign up</Button></Link>
+            <Link to="/login" ><Button variant="success">Sign in</Button></Link>
+            <Link to="/register"><Button>Sign up</Button></Link>
         </div>
     );
 }

@@ -23,8 +23,6 @@ export default function AuthService() {
 
     async function handleLogin({ email, password }) {
 
-        console.log('handleLogin', { email, password })
-
         const { data: { token } } = await api.post('/auth/login', { email, password });
 
         localStorage.setItem('token', JSON.stringify(token));
