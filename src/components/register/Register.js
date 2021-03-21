@@ -30,12 +30,11 @@ export default function Register() {
             await handleLogin({ name, email, password });
         }).catch(({ response }) => {
 
-            if (response.data && response.data.message) {
+            if (response && response.data && response.data.message) {
 
+                console.log(response.data);
                 alert(response.data.message);
             }
-
-            console.log(response.data);
         });
     };
 
