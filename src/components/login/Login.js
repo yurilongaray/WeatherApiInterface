@@ -45,7 +45,7 @@ export default function Login() {
                         <Button type="submit">Login</Button>
                     </div>
                     <div className="col-md-6">
-                        <Link to="/"><Button variant="secondary">Back to Home</Button></Link>
+                        <Link to="/"><Button variant="secondary">Home</Button></Link>
                     </div>
                 </div>
             </form>

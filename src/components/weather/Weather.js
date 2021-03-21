@@ -42,25 +42,27 @@ export default function Weather() {
                 </div>
             ) : (
                 <div>
-                    <label>City:</label>
-                    <div className="row">
-                        <div className="col-md-12">
-                            <label>
-                                <input type="text" placeholder="Ex.: Vancouver" onChange={e => setCity(e.target.value)} required />
-                            </label>
+                    <div className="col-md-6 offset-md-3">
+                        <label>City:</label>
+                        <div className="row">
+                            <div className="col-md-12">
+                                <label>
+                                    <input type="text" placeholder="Ex.: Vancouver" onChange={e => setCity(e.target.value)} required />
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-6">
-                            <Button type="submit" onClick={e => getCityInformations()}>Show me!</Button>
-                        </div>
-                        <div className="col-md-6">
-                            <Button type="button" variant="danger" onClick={e => handleLogout()}>Logout</Button>
+                        <div className="row">
+                            <div className="col-md-6">
+                                <Button type="submit" onClick={e => getCityInformations()}>Show</Button>
+                            </div>
+                            <div className="col-md-6">
+                                <Button type="button" variant="danger" onClick={e => handleLogout()}>Logout</Button>
+                            </div>
                         </div>
                     </div>
                     <br />
                     <h1>{result ? `${result.cityName} (${result.country})` : ''}</h1>
-                    <Table className="Table" striped bordered hover>
+                    <Table className="Table col-md-12" striped bordered hover>
                         <thead>
                             <tr>
                                 <th>Temperature (Fahrenheit)</th>

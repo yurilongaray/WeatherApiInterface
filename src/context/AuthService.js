@@ -34,7 +34,7 @@ export default function AuthService() {
             History.push('/weather');
         }).catch(error => {
 
-            alert('Incorrect email or password.')
+            alert('Incorrect email or password.');
         });
     }
 
