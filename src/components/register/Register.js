@@ -45,7 +45,7 @@ export default function Register() {
                 <div className="row">
                     <label>
                         <p>Name</p>
-                        <input type="text" placeholder="Yuri" onChange={e => setName(e.target.value)} required />
+                        <input type="text" placeholder="Yuri Caldeira" onChange={e => setName(e.target.value)} required />
                     </label>
                 </div>
                 <br />

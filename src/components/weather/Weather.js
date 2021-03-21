@@ -74,14 +74,19 @@ export default function Weather() {
                         {Boolean(result) ? (
                             <tbody>
                                 <tr>
-                                    <td>{result ? result.tempFahrenheit : ''}</td>
-                                    <td>{result ? result.tempCelsius : ''}</td>
-                                    <td>{result ? result.windSpeedKph : ''}</td>
-                                    <td>{result ? result.weatherDescription : ''}</td>
+                                    <td>{result.tempFahrenheit || ''}</td>
+                                    <td>{result.tempCelsius || ''}</td>
+                                    <td>{result.windSpeedKph || ''}</td>
+                                    <td>{result.weatherDescription || ''}</td>
                                 </tr>
                             </tbody>
                         ) : (
-                            <tbody></tbody>
+                            <tbody>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tbody>
                         )}
                     </Table>
                 </div>
