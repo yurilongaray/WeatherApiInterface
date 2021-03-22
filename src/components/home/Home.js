@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { Button } from 'react-bootstrap';
+import api from '../../Api';
 
 import './Home.css';
 
 export default function Home() {
+
+    useEffect(() => {
+
+        api.get('/');
+    });
 
     return (
         <div className="Home">

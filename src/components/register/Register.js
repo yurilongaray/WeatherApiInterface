@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Button } from 'react-bootstrap';
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom';
 import api from '../../Api';
 
 import './Register.css';
