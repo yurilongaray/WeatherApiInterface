@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: process.env.API_SERVER_URL || 'http://localhost:8000'
+  baseURL: 'https://weather-backend-yxlc.herokuapp.com/'
 });
